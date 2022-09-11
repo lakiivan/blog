@@ -22,13 +22,7 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
-Route::get('posts/{post}', function(Post $post) { // Post::where('slug', $post) -> firstOrFail()
-    //dd($post);
-    return view('post', [
-        'post' => $post
-    ]);
-
-});
+Route::get('posts/{post:slug}', [PostController::class, 'show']);
 
 Route::get('categories/{category:slug}', function(Category $category) {
     return view('posts', [

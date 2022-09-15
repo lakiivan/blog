@@ -21,13 +21,13 @@ class PostFactory extends Factory
         return [
             'user_id'       => User::factory(),
             'category_id'   => Category::factory(),
-            'title'         => $this->faker->sentence,
+            'title'         => $this->faker->sentence(),
             'excerpt'       => '<p>'.implode('</p><p>', $this->faker->paragraphs(2)).'</p>',
             //'excerpt'       => $this->faker->sentence,
             //'body'          => $this->faker->paragraph,
             'body'          => '<p>'.implode('</p><p>', $this->faker->paragraphs(6)).'</p>',
-            'slug'          => $this->faker->sentence,
-            'published_at'  => $this->faker->date
+            'slug'          => $this->faker->sentence(),
+            'published_at'  => $this->faker->date()
         ];
     }
 }

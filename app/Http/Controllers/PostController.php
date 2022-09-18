@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Auth\Access\Response;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Auth\Access\Response;
 use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class PostController extends Controller
@@ -41,9 +42,28 @@ class PostController extends Controller
         // }
 
 
-        return view('posts.create', [
+        return view('posts.create');   
+    }
 
-        ]);   
+    public function store()
+    {
+        //ddd(request()->all());
+        
+        $attributes = request()->validate([
+            'title' => 'required',
+            'thumbnail' => 'required|image',
+            'slug' => ['required', Rule::unique('posts', 'slug')],
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')]
+        ]);
+
+        $attributes['user_id'] = auth()->id();
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+
+        Post::create($attributes);
+
+        return redirect('/');
     }
 
 }

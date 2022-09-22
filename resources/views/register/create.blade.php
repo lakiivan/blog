@@ -10,19 +10,19 @@
                     <x-form.input name="name" />
                     <x-form.input name="username" />
                     <x-form.input name="email" type="email" />
-                    <x-form.input name="pasword" type="password" />
+                    <x-form.input name="password" type="password" />
 
                     <x-form.field>
                         <x-form.button>Submit</x-form.button>
                     </x-form.field>
 
-                    <!-- @if($errors->any())
+                    @if($errors->any())
                 <ul>
                     @foreach ($errors->all() as $error)
                     <li class="text-red-500 text-xs">{{ $error }}</li>
                     @endforeach
                 </ul>
-                @endif -->
+                @endif
 
                 </form>
             </x-panel>
